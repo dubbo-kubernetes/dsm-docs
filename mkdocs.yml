@@ -1,0 +1,66 @@
+site_name: DSM Documentation
+site_url: https://dsm-docs.example.com
+repo_url: https://github.com/yourusername/dsm-docs
+
+theme:
+  name: material
+  custom_dir: overrides
+  favicon: assets/favicon.png
+  logo: assets/logo.png
+  font: false
+  palette:
+    scheme: default
+    primary: teal
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+  - attr_list
+  - md_in_html
+
+plugins:
+  - search
+
+extra_css:
+  - assets/custom.css
+
+extra_javascript:
+  - assets/custom.js
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - User Guide:
+    - Overview: user-guide/index.md
+    - Installation: user-guide/installation.md
+    - Configuration: user-guide/configuration.md
+  - Developer Guide:
+    - Overview: developer-guide/index.md
+    - API Reference: developer-guide/api.md
+  - FAQ: faq.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yourusername/dsm-docs
+
