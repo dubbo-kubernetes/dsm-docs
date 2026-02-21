@@ -1,12 +1,15 @@
-site_name: DSM Documentation
+site_name: DSM - Dubbo Service Mesh for Kubernetes
 site_url: https://dsm-docs.example.com
-repo_url: https://github.com/yourusername/dsm-docs
+
+repo_name: dubbo-kubernetes
+repo_url: https://github.com/apache/dubbo-kubernetes
 
 theme:
   name: material
+  language: zh # 默认语言
   custom_dir: overrides
-  favicon: assets/favicon.png
-  logo: assets/logo.png
+  favicon: assets/static/logo.png
+  logo: assets/static/logo.png
   font: false
   palette:
     scheme: default
@@ -20,6 +23,8 @@ theme:
     - search.highlight
     - content.code.copy
     - content.code.annotate
+    - navigation.instant  # 推荐：丝滑切换
+    - i18n                # 必须：开启多语言界面功能
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -39,7 +44,24 @@ markdown_extensions:
   - md_in_html
 
 plugins:
-  - search
+  - i18n:
+      default_language: zh
+      languages:
+        - locale: en
+          name: English
+          default: true
+        - locale: zh
+          name: 中文
+      # 导航栏翻译依然保持这种字典格式
+      nav_translations:
+        zh:
+          Overview: 概述
+          Getting Started: 入门
+          Installation: 安装指南
+          User Guide: 用户指南
+          Upgrade Guide: 升级指南
+  - search:
+      lang: [en, zh]
 
 extra_css:
   - assets/custom.css
@@ -48,19 +70,23 @@ extra_javascript:
   - assets/custom.js
 
 nav:
-  - Home: index.md
-  - Getting Started: getting-started.md
-  - User Guide:
-    - Overview: user-guide/index.md
-    - Installation: user-guide/installation.md
-    - Configuration: user-guide/configuration.md
-  - Developer Guide:
-    - Overview: developer-guide/index.md
-    - API Reference: developer-guide/api.md
-  - FAQ: faq.md
+#  - Home: index.md
+#  - Getting Started: getting-started.md
+#  - User Guide:
+#      - Overview: user-guide/index.md
+#      - Installation: user-guide/installation.md
+#      - Configuration: user-guide/configuration.md
+  - 概述: overview/index.md
+  - 概念: getting-started.md
+  - 安装指南: installation.md
+  - 任务: tasks.md
+  - 运维: operation.md
+  - 版本发布: release.md
+  - 参考: reference.md
 
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/yourusername/dsm-docs
+      link: https://github.com/apache/dubbo-kubernetes
 
+copyright: Copyright © 2026 The Dubbo Kubernetes Team.
