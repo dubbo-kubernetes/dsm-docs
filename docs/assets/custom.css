@@ -241,7 +241,7 @@ code,
 .md-header__button,
 .md-header a {
   color: #374151 !important;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 
 /* Header hover - darker shade */
@@ -853,4 +853,28 @@ article.md-content__inner {
 
 .md-sidebar__scrollwrap {
   padding-left: 1.25rem !important;
+}
+
+.md-copyright {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: .64rem;
+}
+
+.md-copyright__highlight {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+
+.md-footer__link, .md-footer__title, .md-footer-meta__inner, .md-footer a {
+  color: #374151 !important;
+  font-size: 0.595rem;
+}
+
+.md-header .md-source {
+  color: #797f88 !important;
+}
+
+.md-header a {
+  color: #374151 !important;
+  font-size: 0.65rem;
 }
