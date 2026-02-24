@@ -1,6 +1,6 @@
 > 目前服务网格处于初步实验阶段。后续标准功能将逐步完善和支持。
 
-Dubbo Service Mesh（DSM）是通过 xDS 协议实现的控制平面网格模型，该模型没有额外代理转发开销。
+Dubbo Service Mesh（DSM）是通过 xDS 协议实现的控制平面模型，该模型没有额外代理转发开销。
 
 - 每个已部署的应用程序都会注入 Dubbo-Agent 提供 XDS 和 SDS 服务。
 - 所有注入的代理均使用 Kubernetes Gateway API 实现服务与外部系统之间的通信。
