@@ -1,5 +1,6 @@
 site_name: DSM - Dubbo Service Mesh for Kubernetes
-site_url: https://dsm-docs.example.com
+site_url: https://dubbo-kubernetes.github.io/dsm-docs/
+use_directory_urls: true
 
 repo_name: dubbo-kubernetes
 repo_url: https://github.com/apache/dubbo-kubernetes
