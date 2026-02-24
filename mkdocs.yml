@@ -49,9 +49,11 @@ plugins:
       languages:
         - locale: en
           name: English
-          default: true
+          default: false
         - locale: zh
           name: 中文
+          default: true
+          fallback_to_default: true
       # 导航栏翻译依然保持这种字典格式
       nav_translations:
         zh:
