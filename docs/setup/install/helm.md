@@ -1,10 +1,4 @@
----
-description: 使用 Helm 安装
-linkTitle: Helm
-title: Helm
-type: docs
-weight: 2
----
+# Helm
 请遵循本指南使用 Helm 安装和配置 Dubbo 网格。
 
 

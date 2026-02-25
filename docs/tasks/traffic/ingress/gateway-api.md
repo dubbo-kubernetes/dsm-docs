@@ -1,10 +1,5 @@
----
-description: 学习如何使用 Kubernetes Gateway API
-linkTitle: Kubernetes Gateway API
-title: Kubernetes Gateway API
-type: docs
-weight: 1
---- 
+# Kubernetes Gateway API
+本示例演示如何使用 DSM 部署支持的 httpbin 服务，并通过 Gateway API 进行访问。
 
 ## 先决条件
 默认情况下不会安装 Gateway API。如果 Gateway API CRD 不存在，请安装：
@@ -13,12 +8,13 @@ kubectl get crd gateways.gateway.networking.k8s.io &> /dev/null || \
   { kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v1.4.0" | kubectl apply -f -; }
 ```
 
-## 配置网关
+## 创建服务
 ```bash
-kubectl create -f https://raw.githubusercontent.com/istio/istio/release-1.28/samples/httpbin/httpbin.yaml
+kubectl create -f https://raw.githubusercontent.com/apache/dubbo-kubernetes/master/samples/httpbin/httpbin.yaml
 ```
 
-```bash
+## 创建网关
+```yaml
 kubectl create namespace dubbo-ingress
 kubectl apply -f - <<EOF
 apiVersion: gateway.networking.k8s.io/v1
@@ -58,10 +54,15 @@ spec:
 EOF
 ```
 
-## 清理
-
+## 测试服务
 ```bash
-kubectl delete -f https://raw.githubusercontent.com/istio/istio/release-1.28/samples/httpbin/httpbin.yaml
+NODE_IP=$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
+SVC_PORT=$(kubectl get svc gateway-dubbo -n dubbo-ingress -o jsonpath='{.spec.ports[?(@.port==80)].nodePort}')
+curl -s -I -HHost:httpbin.example.com "http://$NODE_IP:$SVC_PORT/get"
+```
+
+## 清理
+```bash
 kubectl delete httproute http
 kubectl delete gateways.gateway.networking.k8s.io gateway -n dubbo-ingress
 kubectl delete ns dubbo-ingress
