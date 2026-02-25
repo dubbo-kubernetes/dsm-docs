@@ -132,16 +132,20 @@ code,
   line-height: 1.6;
 }
 
-/* Syntax highlighting - all white on black */
+/* Syntax highlighting - white text with gray comments on black background */
 .highlight .hll { background-color: #000000 !important; }
-.highlight .c { color: #ffffff !important; } /* Comment */
+
+/* Comments - gray color */
+.highlight .c { color: #999999 !important; } /* Comment */
+.highlight .cm { color: #999999 !important; } /* Comment.Multiline */
+.highlight .cp { color: #999999 !important; } /* Comment.Preproc */
+.highlight .c1 { color: #999999 !important; } /* Comment.Single */
+.highlight .cs { color: #999999 !important; } /* Comment.Special */
+
+/* All other code elements - white color */
 .highlight .err { color: #ffffff !important; } /* Error */
 .highlight .k { color: #ffffff !important; } /* Keyword */
 .highlight .o { color: #ffffff !important; } /* Operator */
-.highlight .cm { color: #ffffff !important; } /* Comment.Multiline */
-.highlight .cp { color: #ffffff !important; } /* Comment.Preproc */
-.highlight .c1 { color: #ffffff !important; } /* Comment.Single */
-.highlight .cs { color: #ffffff !important; } /* Comment.Special */
 .highlight .gd { color: #ffffff !important; } /* Generic.Deleted */
 .highlight .ge { color: #ffffff !important; } /* Generic.Emph */
 .highlight .gr { color: #ffffff !important; } /* Generic.Error */
@@ -194,6 +198,25 @@ code,
 .highlight .vg { color: #ffffff !important; } /* Name.Variable.Global */
 .highlight .vi { color: #ffffff !important; } /* Name.Variable.Instance */
 .highlight .il { color: #ffffff !important; } /* Literal.Number.Integer.Long */
+
+/* Additional overrides to ensure all text in code blocks is white or gray */
+.highlight span { color: #ffffff !important; }
+.highlight .c, .highlight .cm, .highlight .cp, .highlight .c1, .highlight .cs { color: #999999 !important; }
+
+/* Force all code content to be white by default */
+.md-typeset pre code *,
+.md-typeset pre code span {
+  color: #ffffff !important;
+}
+
+/* Override for comment spans specifically */
+.md-typeset pre code .c,
+.md-typeset pre code .cm,
+.md-typeset pre code .cp,
+.md-typeset pre code .c1,
+.md-typeset pre code .cs {
+  color: #999999 !important;
+}
 
 /* Code copy button styling */
 .md-clipboard {
@@ -432,42 +455,78 @@ html {
   font-size: 0.8125rem;
 }
 
-/* Navigation - fix duplicate active state and alignment */
-/* Top-level navigation items (matching top nav bar) - gray color */
+/* Navigation - unified color scheme for all items */
+/* Base navigation link style - consistent gray color for all items */
+.md-nav__link {
+  color: #6B7280 !important;
+  font-family: var(--md-ui-font);
+  font-size: 0.6875rem;
+  transition: all 0.2s ease;
+  padding-left: 0.6rem;
+  font-weight: 500;
+}
+
+/* Top-level navigation items - no indent */
 .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link {
   color: #6B7280 !important;
   font-weight: 600;
   background: transparent;
   border-left: none;
-  padding-left: 0.6rem;
+  padding-left: 0.6rem !important;
   font-size: 0.6875rem;
 }
 
-/* Section headers (like "User Guide") - gray color, no indent */
+/* Section headers (like "流量管理", "安全", "可观测性") - NO indent, keep at left */
 .md-nav__item--section > .md-nav__link {
   color: #6B7280 !important;
   font-weight: 700;
   background: transparent;
   border-left: none;
-  padding-left: 0.6rem;
+  padding-left: 0.6rem !important;
   font-size: 0.6875rem;
   margin-bottom: 0.25rem;
 }
 
-/* Child items under sections - same alignment as section header */
-.md-nav__item--section .md-nav__item .md-nav__link {
-  padding-left: 0.6rem !important;
+/* First level children under sections - indented */
+.md-nav__item--section > .md-nav > .md-nav__list > .md-nav__item > .md-nav__link {
+  color: #6B7280 !important;
+  padding-left: 1.2rem !important;
   margin-left: 0 !important;
+  font-weight: 500;
+  font-size: 0.6875rem;
 }
 
-/* Only the current page should have active state, not parent items */
+/* Second level nested items - more indentation */
+.md-nav__item--section > .md-nav > .md-nav__list > .md-nav__item > .md-nav > .md-nav__list > .md-nav__item > .md-nav__link {
+  color: #6B7280 !important;
+  padding-left: 1.8rem !important;
+  margin-left: 0 !important;
+  font-weight: 400;
+  font-size: 0.65rem;
+}
+
+/* Third level nested items - even more indentation */
+.md-nav__item--section > .md-nav > .md-nav__list > .md-nav__item > .md-nav > .md-nav__list > .md-nav__item > .md-nav > .md-nav__list > .md-nav__item > .md-nav__link {
+  color: #6B7280 !important;
+  padding-left: 1.8rem !important;
+  margin-left: 0 !important;
+  font-weight: 400;
+  font-size: 0.625rem;
+}
+
+/* Active parent items - keep same gray color, NO indent */
 .md-nav__item--active > .md-nav__link {
-  color: var(--color-text-primary) !important;
+  color: #6B7280 !important;
   font-weight: 600;
   background: transparent;
   border-left: none;
-  padding-left: 0.6rem;
+  padding-left: 0.6rem !important;
   font-size: 0.6875rem;
+}
+
+/* Active section headers - NO indent */
+.md-nav__item--section.md-nav__item--active > .md-nav__link {
+  padding-left: 0.6rem !important;
 }
 
 /* Only the current page (with aria-current) gets the blue indicator */
@@ -476,17 +535,9 @@ html {
   font-weight: 600;
   background: rgba(14, 165, 233, 0.1);
   border-left: 3px solid var(--color-accent);
-  padding-left: 0.6rem;
 }
 
-.md-nav__link {
-  color: var(--color-text-primary) !important;
-  font-family: var(--md-ui-font);
-  font-size: 0.6875rem;
-  transition: all 0.2s ease;
-  padding-left: 0.6rem;
-}
-
+/* Hover state - blue accent */
 .md-nav__link:hover {
   color: var(--color-accent) !important;
   background: rgba(14, 165, 233, 0.05);
@@ -494,7 +545,7 @@ html {
 
 /* Navigation title */
 .md-nav__title {
-  color: var(--color-text-primary) !important;
+  color: #6B7280 !important;
   font-size: 0.6875rem;
   font-weight: 600;
 }
